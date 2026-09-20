@@ -76,6 +76,73 @@ body {
   border-color: #4f46e5;
 }
 
+/* =========================
+   EMI SLIDER
+   ========================= */
+
+.input-group input[type="range"] {
+  width: 100%;
+  height: 6px;
+  padding: 0;
+  margin: 10px 0 4px;
+  border: none;
+  border-radius: 999px;
+  background: #e4e7ec;
+  outline: none;
+  cursor: pointer;
+  accent-color: #4f46e5;
+}
+
+/* Chrome / Safari */
+.input-group input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #e4e7ec;
+}
+
+.input-group input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -7px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: #4f46e5;
+  box-shadow: 0 2px 6px rgba(23, 32, 51, 0.25);
+  cursor: pointer;
+}
+
+/* Firefox */
+.input-group input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #e4e7ec;
+}
+
+.input-group input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: #4f46e5;
+  box-shadow: 0 2px 6px rgba(23, 32, 51, 0.25);
+  cursor: pointer;
+}
+
+/* Slider labels */
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  color: #667085;
+  font-size: 13px;
+}
+
+/* =========================
+   BUTTON
+   ========================= */
+
 .simulate-button {
   width: 100%;
   margin-top: 24px;
@@ -92,6 +159,10 @@ body {
 .simulate-button:hover {
   background: #4338ca;
 }
+
+/* =========================
+   RESULTS
+   ========================= */
 
 .results {
   margin-top: 32px;
@@ -125,6 +196,33 @@ body {
   font-size: 26px;
   font-weight: 800;
 }
+
+/* =========================
+   EXPLANATION
+   ========================= */
+
+.explanation-card {
+  margin-top: 20px;
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(23, 32, 51, 0.06);
+}
+
+.explanation-card h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.explanation-card p {
+  margin: 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
 
 @media (max-width: 700px) {
   .form-grid,

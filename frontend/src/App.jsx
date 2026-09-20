@@ -103,7 +103,7 @@ function App() {
             className="simulate-button"
             onClick={simulateFinances}
           >
-            Simulate My Finances
+            Simulate This EMI
           </button>
 
         </div>
@@ -140,6 +140,12 @@ function App() {
                 <p>{result.financial_health}</p>
               </div>
 
+            </div>
+
+            {/* Explanation */}
+            <div className="explanation-card">
+              <h3>Why this result?</h3>
+              <p>{result.explanation}</p>
             </div>
 
           </div>
