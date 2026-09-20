@@ -161,6 +161,29 @@ body {
 }
 
 /* =========================
+   ERROR MESSAGE
+   ========================= */
+
+.error-card {
+  margin-top: 20px;
+  padding: 18px 20px;
+  background: #fff4f4;
+  border: 1px solid #f3b4b4;
+  border-radius: 16px;
+  color: #9b1c1c;
+}
+
+.error-card strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.error-card p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* =========================
    RESULTS
    ========================= */
 
