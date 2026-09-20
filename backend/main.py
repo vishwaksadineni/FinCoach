@@ -1,40 +1,42 @@
-import json
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from financial_engine import calculate_financials
 
 
-def load_profile():
-    with open("profile.json", "r") as file:
-        return json.load(file)
+app = FastAPI(title="FinCoach API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class FinancialProfile(BaseModel):
+    income: float
+    expenses: float
+    savings: float
+    emi: float
 
 
-def main():
-    profile = load_profile()
+@app.get("/")
+def home():
+    return {
+        "message": "FinCoach API is running!"
+    }
+
+
+@app.post("/simulate")
+def simulate(profile: FinancialProfile):
 
     result = calculate_financials(
-        profile["income"],
-        profile["expenses"],
-        profile["savings"],
-        profile["emi"]
+        profile.income,
+        profile.expenses,
+        profile.savings,
+        profile.emi
     )
 
-    print("FinCoach Financial Results")
-    print("--------------------------")
-
-    print(
-        f"Monthly surplus: ₹{result['monthly_surplus']}"
-    )
-
-    print(
-        f"Emergency coverage: "
-        f"{result['emergency_months']} months"
-    )
-
-    print(
-        f"Debt burden: "
-        f"{result['debt_burden_percent']}%"
-    )
-
-
-if __name__ == "__main__":
-    main()
+    return result
