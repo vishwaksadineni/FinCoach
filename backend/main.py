@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from financial_engine import calculate_financials
+from bedrock_service import generate_financial_explanation
 
 
 app = FastAPI(title="FinCoach API")
@@ -37,11 +38,38 @@ def home():
 @app.post("/simulate")
 def simulate(profile: FinancialProfile):
 
+    # --------------------------------
+    # Deterministic financial engine
+    # --------------------------------
+
     result = calculate_financials(
         profile.income,
         profile.expenses,
         profile.savings,
         profile.emi
     )
+
+    # --------------------------------
+    # AI explanation
+    # --------------------------------
+
+    try:
+        ai_explanation = generate_financial_explanation(
+            profile.income,
+            profile.expenses,
+            profile.savings,
+            profile.emi,
+            result["monthly_surplus"],
+            result["emergency_months"],
+            result["debt_burden_percent"],
+            result["financial_health"],
+        )
+
+        result["explanation"] = ai_explanation
+
+    except Exception as error:
+        # Keep the deterministic explanation if Bedrock
+        # is temporarily unavailable.
+        print(f"Bedrock explanation failed: {error}")
 
     return result
