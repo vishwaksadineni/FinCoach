@@ -5,7 +5,7 @@ function App() {
   const [income, setIncome] = useState("");
   const [expenses, setExpenses] = useState("");
   const [savings, setSavings] = useState("");
-  const [emi, setEmi] = useState("");
+  const [emi, setEmi] = useState(3000);
   const [result, setResult] = useState(null);
 
   const simulateFinances = async () => {
@@ -42,8 +42,10 @@ function App() {
 
           <div className="form-grid">
 
+            {/* Monthly Income */}
             <div className="input-group">
               <label>Monthly Income</label>
+
               <input
                 type="number"
                 value={income}
@@ -52,8 +54,10 @@ function App() {
               />
             </div>
 
+            {/* Monthly Expenses */}
             <div className="input-group">
               <label>Monthly Expenses</label>
+
               <input
                 type="number"
                 value={expenses}
@@ -62,8 +66,10 @@ function App() {
               />
             </div>
 
+            {/* Savings */}
             <div className="input-group">
               <label>Savings</label>
+
               <input
                 type="number"
                 value={savings}
@@ -72,14 +78,23 @@ function App() {
               />
             </div>
 
+            {/* EMI Slider */}
             <div className="input-group">
-              <label>Monthly EMI</label>
+              <label>Monthly EMI: ₹{emi}</label>
+
               <input
-                type="number"
+                type="range"
+                min="1000"
+                max="15000"
+                step="500"
                 value={emi}
-                onChange={(e) => setEmi(e.target.value)}
-                placeholder="3000"
+                onChange={(e) => setEmi(Number(e.target.value))}
               />
+
+              <div className="slider-labels">
+                <span>₹1,000</span>
+                <span>₹15,000</span>
+              </div>
             </div>
 
           </div>
@@ -93,6 +108,7 @@ function App() {
 
         </div>
 
+        {/* Results */}
         {result && (
           <div className="results">
 
@@ -100,19 +116,28 @@ function App() {
 
             <div className="results-grid">
 
+              {/* Monthly Surplus */}
               <div className="result-card">
                 <h3>Monthly Surplus</h3>
                 <p>₹{result.monthly_surplus}</p>
               </div>
 
+              {/* Emergency Coverage */}
               <div className="result-card">
                 <h3>Emergency Coverage</h3>
                 <p>{result.emergency_months} months</p>
               </div>
 
+              {/* Debt Burden */}
               <div className="result-card">
                 <h3>Debt Burden</h3>
                 <p>{result.debt_burden_percent}%</p>
+              </div>
+
+              {/* Financial Health */}
+              <div className="result-card">
+                <h3>Financial Health</h3>
+                <p>{result.financial_health}</p>
               </div>
 
             </div>
